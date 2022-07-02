@@ -21,3 +21,4 @@ def test_records_score_for_each_move():
         boy.make_move()
 
     assert boy.scores == [-0.5, 1.5]
+    assert boy.total_score() == 1

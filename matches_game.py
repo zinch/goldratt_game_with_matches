@@ -27,6 +27,9 @@ class Boy(object):
         self.moves.append(matches)
         self.scores.append(matches - 3.5)
 
+    def total_score(self):
+        return sum(self.scores)
+
 
 boys = [Boy("Andy", first=True), Boy("Ben"), Boy("Chuck"), Boy("Dave"), Boy("Evan")]
 
