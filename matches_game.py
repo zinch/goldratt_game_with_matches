@@ -1,8 +1,17 @@
 import random
 
 
-class Boy(object):
+class Stock(object):
+    def __init__(self):
+        self.stock = 0
+
+    def receive_stock(self, value):
+        self.stock += value
+
+
+class Boy(Stock):
     def __init__(self, name, first=False):
+        Stock.__init__(self)
         self.name = name
         self.first = first
         self.stock = 0
@@ -31,14 +40,14 @@ class Boy(object):
 
         self.stock -= matches_to_send
         if self.next != None:
-            self.next.receive_matches(matches_to_send)
-
-    def receive_matches(self, matches):
-        self.stock += matches
+            self.next.receive_stock(matches_to_send)
 
     def total_score(self):
         return sum(self.scores)
 
+class Production(Stock):
+    def __init__(self):
+        Stock.__init__(self)
 
 boys = [Boy("Andy", first=True), Boy("Ben"), Boy("Chuck"), Boy("Dave"), Boy("Evan")]
 
@@ -52,17 +61,24 @@ def make_move(boy):
 if __name__ == "__main__":
 
     print(boys)
+    production = Production()
+
     counter = 1
     for i in range(len(boys) - 1):
         boys[i].set_next(boys[i+1])
-    while counter <= 10:
+
+    boys[-1].set_next(production)
+
+    moves = 10
+    while counter <= moves:
         for boy in boys:
             boy.make_move()
-        print(f"Move {counter}")
         counter += 1
 
+    print(f"Expectd production is {3.5 * moves}")
+    print(f"Actual production is {production.stock}\n")
     for boy in boys:
-        print(boy)
+        print(f"{boy} gets score {boy.total_score()} with stock {boy.stock}")
         print(f"\t{boy.moves}")
         print(f"\t{boy.scores}")
 
