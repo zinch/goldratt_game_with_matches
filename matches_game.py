@@ -42,3 +42,20 @@ if __name__ == "__main__":
         print(f"\t{boy.moves}")
         print(f"\t{boy.scores}")
 
+
+    with open("game_chart.csv", "w", encoding="utf-8") as f:
+        participant_len = 10
+        total_len = participant_len * (len(boys) + 1) + 2 * (len(boys) - 1)
+
+        def horizontal_line():
+            f.write(f"{'_' * total_len}\n")
+
+        def upper_line():
+            f.write("\u203E" * total_len)
+            f.write("\n")
+
+        names = " ".join(map(lambda b: b.name.ljust(participant_len), boys))
+        horizontal_line()
+        f.write(f"{' ' * (participant_len + 2)}{names}\n")
+        upper_line()
+
