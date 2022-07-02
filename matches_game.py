@@ -39,7 +39,7 @@ if __name__ == "__main__":
     print(f"Actual production is {production.stock}\n")
     for boy in boys:
         print(f"{boy} gets score {boy.total_score()} with stock {boy.stock}")
-        print(f"\t{boy.moves}")
+        print(f"\t{boy.roll_results}")
         print(f"\t{boy.scores}")
 
 
@@ -71,7 +71,7 @@ if __name__ == "__main__":
         upper_line()
 
         def scores_as_string(boy):
-            return "".join(map(str, boy.moves)).ljust(participant_len + 2)
+            return "".join(map(str, boy.roll_results)).ljust(participant_len + 2)
 
         all_scores = "".join(map(scores_as_string, boys))
         f.write(f"{'Roll result'.ljust(participant_len + 2)}{all_scores}\n")

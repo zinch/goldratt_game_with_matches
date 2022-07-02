@@ -10,7 +10,7 @@ class Boy(Stock):
         self.name = name
         self.first = first
         self.stock = 0
-        self.moves = []
+        self.roll_results = []
         self.scores = []
         self.next = None
 
@@ -25,7 +25,7 @@ class Boy(Stock):
 
     def make_move(self):
         matches = cast_die()
-        self.moves.append(matches)
+        self.roll_results.append(matches)
 
         if self.first:
             self.stock = matches

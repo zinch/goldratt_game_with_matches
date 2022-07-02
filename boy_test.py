@@ -9,7 +9,7 @@ def test_records_number_of_matches():
     with mock.patch('boy.cast_die', lambda: 6):
         boy.make_move()
 
-    assert boy.moves == [4, 6]
+    assert boy.roll_results == [4, 6]
 
 def test_records_score_for_each_move():
     boy = Boy("Randy")
@@ -46,5 +46,5 @@ def test_records_number_of_matches():
     with mock.patch('matches_game.cast_die', lambda: 6):
         next_boy.make_move()
 
-    assert next_boy.moves == [3, 1]
+    assert next_boy.roll_results == [3, 1]
 
