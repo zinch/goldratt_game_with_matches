@@ -16,7 +16,7 @@ def make_move(boy):
 if __name__ == "__main__":
     moves = 10
     try:
-        moves = int(sys.argv[1])
+        moves = min(moves, int(sys.argv[1]))
         print(f"Will make {moves} moves")
     except:
         print(f"Will use default number of moves = {moves}")
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     with open("game_chart.csv", "w", encoding="utf-8") as f:
         participant_len = 10
-        total_len = participant_len * (len(boys) + 1) + 2 * (len(boys) - 1)
+        total_len = participant_len * (len(boys) + 1) + 2 * (len(boys) - 1) + 2
 
         def horizontal_line():
             f.write(f"{'_' * total_len}\n")
@@ -54,8 +54,19 @@ if __name__ == "__main__":
             f.write("\u203E" * total_len)
             f.write("\n")
 
-        names = " ".join(map(lambda b: b.name.ljust(participant_len), boys))
+        names = "  ".join(map(lambda b: b.name.ljust(participant_len), boys))
         horizontal_line()
         f.write(f"{' ' * (participant_len + 2)}{names}\n")
+        upper_line()
+        move = "".join(map(str, list(range(1, moves))))
+        if moves == 10:
+            move = move + "0"
+        else:
+            move = move + str(moves)
+
+        move = move.ljust(participant_len + 2)
+        all_moves = move * len(boys)
+
+        f.write(f"{'Move nr'.ljust(participant_len + 2)}{all_moves}\n")
         upper_line()
 
