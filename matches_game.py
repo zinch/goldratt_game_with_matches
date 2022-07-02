@@ -1,4 +1,5 @@
 import random
+import sys
 
 
 class Stock(object):
@@ -59,6 +60,12 @@ def make_move(boy):
     print(f"{boy} passes {n} matches to the next stage")
 
 if __name__ == "__main__":
+    moves = 10
+    try:
+        moves = int(sys.argv[1])
+        print(f"Will make {moves} moves")
+    except:
+        print(f"Will use default number of moves = {moves}")
 
     print(boys)
     production = Production()
@@ -69,7 +76,6 @@ if __name__ == "__main__":
 
     boys[-1].set_next(production)
 
-    moves = 10
     while counter <= moves:
         for boy in boys:
             boy.make_move()
