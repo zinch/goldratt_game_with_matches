@@ -12,6 +12,7 @@ class Boy(Stock):
         self.stock = 0
         self.roll_results = []
         self.scores = []
+        self.matches_moved = []
         self.next = None
 
     def set_next(self, boy):
@@ -30,12 +31,13 @@ class Boy(Stock):
         if self.first:
             self.stock = matches
 
-        matches_to_send = min(self.stock, matches)
-        self.scores.append(matches_to_send - 3.5)
+        matches_moved = min(self.stock, matches)
+        self.matches_moved.append(matches_moved)
+        self.scores.append(matches_moved - 3.5)
 
-        self.stock -= matches_to_send
+        self.stock -= matches_moved
         if self.next != None:
-            self.next.receive_stock(matches_to_send)
+            self.next.receive_stock(matches_moved)
 
     def total_score(self):
         return sum(self.scores)
