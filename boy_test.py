@@ -13,6 +13,7 @@ def test_records_number_of_matches():
 
 def test_records_score_for_each_move():
     boy = Boy("Randy")
+    boy.stock = 3 + 5
     with mock.patch('matches_game.cast_die', lambda: 3):
         boy.make_move()
 
@@ -31,6 +32,7 @@ def test_records_number_of_matches():
         boy.make_move()
 
     assert boy.stock == 0
+    assert boy.scores == [-2.5]
     assert next_boy.stock == 1
 
     with mock.patch('matches_game.cast_die', lambda: 3):

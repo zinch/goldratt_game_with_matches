@@ -32,12 +32,12 @@ class Boy(Stock):
     def make_move(self):
         matches = cast_die()
         self.moves.append(matches)
-        self.scores.append(matches - 3.5)
 
         if self.first:
             self.stock = matches
 
         matches_to_send = min(self.stock, matches)
+        self.scores.append(matches_to_send - 3.5)
 
         self.stock -= matches_to_send
         if self.next != None:
