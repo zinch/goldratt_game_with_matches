@@ -8,6 +8,7 @@ class Boy(object):
         self.stock = 0
         self.moves = []
         self.scores = []
+        self.next = None
 
     def set_next(self, boy):
         self.next = boy
@@ -19,13 +20,21 @@ class Boy(object):
         return self.__str__()
 
     def make_move(self):
-        if self.first:
-            matches = cast_die()
-        else:
-            matches = max(self.stock, cast_die())
-        print(f"{self.name} casts {matches}")
+        matches = cast_die()
         self.moves.append(matches)
         self.scores.append(matches - 3.5)
+
+        if self.first:
+            self.stock = matches
+
+        matches_to_send = min(self.stock, matches)
+
+        self.stock -= matches_to_send
+        if self.next != None:
+            self.next.receive_matches(matches_to_send)
+
+    def receive_matches(self, matches):
+        self.stock += matches
 
     def total_score(self):
         return sum(self.scores)
