@@ -70,3 +70,10 @@ if __name__ == "__main__":
         f.write(f"{'Move nr'.ljust(participant_len + 2)}{all_moves}\n")
         upper_line()
 
+        def scores_as_string(boy):
+            return "".join(map(str, boy.moves)).ljust(participant_len + 2)
+
+        all_scores = "".join(map(scores_as_string, boys))
+        f.write(f"{'Roll result'.ljust(participant_len + 2)}{all_scores}\n")
+        upper_line()
+
